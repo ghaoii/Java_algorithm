@@ -6,16 +6,38 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Num3_PrintListFromTailToHead {
-    //递归解决问题，语义 - 传入链表的头结点，就能将链表逆序输入数组，并返回数组
+    //链表逆序
     public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
         ArrayList<Integer> ret = new ArrayList<>();
         if(listNode == null){
             return ret;
         }
-        ret = printListFromTailToHead(listNode.next);
-        ret.add(listNode.val);
+        ListNode prev = null;
+        ListNode cur = listNode;
+        while(cur != null){
+            ListNode next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        while(prev != null){
+            ret.add(prev.val);
+            prev = prev.next;
+        }
         return ret;
     }
+
+
+    //递归解决问题，语义 - 传入链表的头结点，就能将链表逆序输入数组，并返回数组
+//    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+//        ArrayList<Integer> ret = new ArrayList<>();
+//        if(listNode == null){
+//            return ret;
+//        }
+//        ret = printListFromTailToHead(listNode.next);
+//        ret.add(listNode.val);
+//        return ret;
+//    }
 
 
     //先遍历链表，把链表里的值保存到数组中，然后逆序数组
