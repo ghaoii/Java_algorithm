@@ -4,37 +4,53 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class CC31_MinimumTotal {
-    //方法一，开辟新的空间
+    //方法二，自底向上
     public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
         if(triangle == null || triangle.isEmpty()){
             return 0;
         }
-        ArrayList<ArrayList<Integer>> ret = new ArrayList<>();
-        for (int i = 0; i < triangle.size(); i++) {
-            ret.add(new ArrayList<Integer>());
-        }
-        ret.get(0).add(triangle.get(0).get(0));
-        for (int i = 1; i < triangle.size(); i++) {
-            for (int j = 0; j <= i; j++) {
-                int temp = 0;
-                //先判断边界，然后再处理中间
-                if(j == 0){
-                    temp = ret.get(i - 1).get(j);
-                }else if(j == i){
-                    temp = ret.get(i - 1).get(j - 1);
-                }else{
-                    temp = Math.min(ret.get(i - 1).get(j - 1), ret.get(i - 1).get(j));
-                }
-                ret.get(i).add(temp + triangle.get(i).get(j));
+        int row = triangle.size();
+        for (int i = row - 2; i >= 0; i--) {
+            for (int j = 0; j < triangle.get(i).size(); j++) {
+                //f(i, j) = min( f(i + 1, j), f(i + 1, j + 1) ) + arr[i][j]
+                int min = Math.min(triangle.get(i + 1).get(j), triangle.get(i + 1).get(j + 1));
+                triangle.get(i).set(j, min + triangle.get(i).get(j));
             }
         }
-        int row = triangle.size();
-        int min = ret.get(row - 1).get(0);
-        for (int i = 0; i < row; i++) {
-            min = Math.min(min, ret.get(row - 1).get(i));
-        }
-        return min;
+        return triangle.get(0).get(0);
     }
+
+    //方法一，开辟新的空间
+//    public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
+//        if(triangle == null || triangle.isEmpty()){
+//            return 0;
+//        }
+//        ArrayList<ArrayList<Integer>> ret = new ArrayList<>();
+//        for (int i = 0; i < triangle.size(); i++) {
+//            ret.add(new ArrayList<Integer>());
+//        }
+//        ret.get(0).add(triangle.get(0).get(0));
+//        for (int i = 1; i < triangle.size(); i++) {
+//            for (int j = 0; j <= i; j++) {
+//                int temp = 0;
+//                //先判断边界，然后再处理中间
+//                if(j == 0){
+//                    temp = ret.get(i - 1).get(j);
+//                }else if(j == i){
+//                    temp = ret.get(i - 1).get(j - 1);
+//                }else{
+//                    temp = Math.min(ret.get(i - 1).get(j - 1), ret.get(i - 1).get(j));
+//                }
+//                ret.get(i).add(temp + triangle.get(i).get(j));
+//            }
+//        }
+//        int row = triangle.size();
+//        int min = ret.get(row - 1).get(0);
+//        for (int i = 0; i < row; i++) {
+//            min = Math.min(min, ret.get(row - 1).get(i));
+//        }
+//        return min;
+//    }
 
     //方法一，不开辟新空间
 //    public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
