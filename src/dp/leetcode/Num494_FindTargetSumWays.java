@@ -7,7 +7,8 @@ public class Num494_FindTargetSumWays {
         for (int num : nums) {
             col += num;
         }
-        if(target > col) {
+        //target有可能大于col，也可能小雨-col，两种情况都要考虑
+        if(Math.abs(target) > col) {
             return 0;
         }
         int[][] sum = new int[row + 1][col * 2 + 1];
