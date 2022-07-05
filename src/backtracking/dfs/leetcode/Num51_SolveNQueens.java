@@ -1,7 +1,6 @@
 package backtracking.dfs.leetcode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 // 用于存储每一行的位置
@@ -26,7 +25,7 @@ public class Num51_SolveNQueens {
 
     private List<List<String>> transform(List<List<Pair>> allRes, int n) {
         List<List<String>> ret = new ArrayList<>();
-        for(List<Pair> pairs : allRes) {
+        for (List<Pair> pairs : allRes) {
             List<StringBuilder> temp = new ArrayList<>();
             for (int i = 0; i < n; i++) {
                 StringBuilder sb = new StringBuilder();
@@ -39,7 +38,7 @@ public class Num51_SolveNQueens {
                 temp.get(pair.x).setCharAt(pair.y, 'Q');
             }
             List<String> curRes = new ArrayList<>();
-            for(StringBuilder curRow : temp) {
+            for (StringBuilder curRow : temp) {
                 curRes.add(curRow.toString());
             }
             ret.add(curRes);
@@ -49,15 +48,15 @@ public class Num51_SolveNQueens {
 
     private void dfs(List<List<Pair>> allRes, List<Pair> curRes, int curRow, int n) {
         // 如果n个皇后都放置好了，就把这种方案放到结果集中
-        if(curRow == n) {
+        if (curRow == n) {
             List<Pair> temp = new ArrayList<>();
-            for(Pair pair : curRes) {
+            for (Pair pair : curRes) {
                 temp.add(pair);
             }
             allRes.add(temp);
         }
         for (int i = 0; i < n; i++) {
-            if(isValid(curRes, curRow, i)) {
+            if (isValid(curRes, curRow, i)) {
                 curRes.add(new Pair(curRow, i));
                 dfs(allRes, curRes, curRow + 1, n);
                 curRes.remove(curRow);
@@ -66,8 +65,8 @@ public class Num51_SolveNQueens {
     }
 
     private boolean isValid(List<Pair> curRes, int curRow, int col) {
-        for(Pair pair : curRes) {
-            if(pair.y == col || pair.x + pair.y == curRow + col || pair.x - pair.y == curRow - col) {
+        for (Pair pair : curRes) {
+            if (pair.y == col || pair.x + pair.y == curRow + col || pair.x - pair.y == curRow - col) {
                 return false;
             }
         }
