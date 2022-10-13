@@ -51,10 +51,10 @@ public class Main {
 //}
 
 //合并二叉树
-//class TreeNode {
+//class dp.leetcode.TreeNode {
 //    int val;
-//    TreeNode left;
-//    TreeNode right;
+//    dp.leetcode.TreeNode left;
+//    dp.leetcode.TreeNode right;
 //}
 //public class Main {
 //    static Scanner scanner = new Scanner(System.in);
@@ -62,25 +62,25 @@ public class Main {
 //    public static void main(String[] args) {
 //        int n = scanner.nextInt();
 //        int m = scanner.nextInt();
-//        TreeNode[] root1 = new TreeNode[n];
-//        TreeNode[] root2 = new TreeNode[m];
+//        dp.leetcode.TreeNode[] root1 = new dp.leetcode.TreeNode[n];
+//        dp.leetcode.TreeNode[] root2 = new dp.leetcode.TreeNode[m];
 //        for (int i = 0; i < n; i++) {
-//            root1[i] = new TreeNode();
+//            root1[i] = new dp.leetcode.TreeNode();
 //        }
 //        for (int i = 0; i < m; i++) {
-//            root2[i] = new TreeNode();
+//            root2[i] = new dp.leetcode.TreeNode();
 //        }
 //        buildTree(root1, n);
 //        buildTree(root2, m);
 //
 //        // 传入两棵树的跟结点
-//        TreeNode root = merge(root1[0], root2[0]);
+//        dp.leetcode.TreeNode root = merge(root1[0], root2[0]);
 //
 //        //层序遍历输出合并后的数
-//        Deque<TreeNode> queue = new LinkedList<>();
+//        Deque<dp.leetcode.TreeNode> queue = new LinkedList<>();
 //        queue.offer(root);
 //        while(!queue.isEmpty()) {
-//            TreeNode node = queue.poll();
+//            dp.leetcode.TreeNode node = queue.poll();
 //            System.out.print(node.val + " ");
 //            if(node.left != null) {
 //                queue.offer(node.left);
@@ -96,7 +96,7 @@ public class Main {
 //     * @param root1
 //     * @param root2
 //     */
-//    private static TreeNode merge(TreeNode root1, TreeNode root2) {
+//    private static dp.leetcode.TreeNode merge(dp.leetcode.TreeNode root1, dp.leetcode.TreeNode root2) {
 //        // 只有当两棵树的根节点都存在，才进行值相加
 //        if(root1 != null && root2 != null) {
 //            root1.val += root2.val;
@@ -108,7 +108,7 @@ public class Main {
 //        return root1 != null ? root1 : root2;
 //    }
 //
-//    private static void buildTree(TreeNode[] node, int n) {
+//    private static void buildTree(dp.leetcode.TreeNode[] node, int n) {
 //        for (int i = 0; i < n; i++) {
 //            int left = scanner.nextInt();
 //            int right = scanner.nextInt();
