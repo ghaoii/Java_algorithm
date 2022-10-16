@@ -6,13 +6,13 @@ public class Num146_LRUCache {
 
 }
 
-class ListNode {
+class Node {
     int key;
     int value;
-    ListNode prev;
-    ListNode next;
+    Node prev;
+    Node next;
 
-    public ListNode(int key, int value) {
+    public Node(int key, int value) {
         this.key = key;
         this.value = value;
     }
@@ -20,21 +20,21 @@ class ListNode {
 
 // 封装了各种API的
 class DoubleLinkedList {
-    ListNode head;// 虚拟头结点
+    Node head;// 虚拟头结点
 
-    ListNode tail;// 虚拟尾结点
+    Node tail;// 虚拟尾结点
 
     private int size;
 
     public DoubleLinkedList() {
-        this.head = new ListNode(0, 0);
-        this.tail = new ListNode(0, 0);
+        this.head = new Node(0, 0);
+        this.tail = new Node(0, 0);
         head.next = tail;
         tail.prev = head;
     }
 
     // 在链表末尾添加元素
-    public void add(ListNode node) {
+    public void add(Node node) {
         tail.prev.next = node;
         node.prev = tail.prev;
         node.next = tail;
@@ -43,7 +43,7 @@ class DoubleLinkedList {
     }
 
     // 删除结点
-    public void remove(ListNode node) {
+    public void remove(Node node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
         node.prev = node.next = null;
@@ -68,7 +68,7 @@ class LRUCache {
 
     private int capacity;
 
-    private Map<Integer, ListNode> map = new HashMap<>();
+    private Map<Integer, Node> map = new HashMap<>();
 
     private DoubleLinkedList list = new DoubleLinkedList();
 
@@ -80,21 +80,21 @@ class LRUCache {
         if(!map.containsKey(key)) {
             return -1;
         }
-        ListNode node = map.get(key);
+        Node node = map.get(key);
         changeNew(node);
         return node.value;
     }
 
     public void put(int key, int value) {
         if(map.containsKey(key)) {
-            ListNode node = map.get(key);
+            Node node = map.get(key);
             node.value = value;
             changeNew(node);
             return;
         }
 
         if(list.getSize() == capacity) {
-            ListNode node = list.head.next;
+            Node node = list.head.next;
             list.removeFirst();
             map.remove(node.key);
         }
@@ -102,12 +102,12 @@ class LRUCache {
     }
 
     private void addNew(int key, int value) {
-        ListNode node = new ListNode(key, value);
+        Node node = new Node(key, value);
         list.add(node);
         map.put(key, node);
     }
 
-    private void changeNew(ListNode node) {
+    private void changeNew(Node node) {
         list.remove(node);
         list.add(node);
     }
@@ -119,11 +119,11 @@ class LRUCache {
 //
 //    private int size;
 //
-//    private Map<Integer, ListNode> map;
+//    private Map<Integer, Node> map;
 //
-//    private ListNode head;
+//    private Node head;
 //
-//    private ListNode tail;
+//    private Node tail;
 //
 //    public LRUCache(int capacity) {
 //        map = new HashMap<>();
@@ -136,7 +136,7 @@ class LRUCache {
 //            return -1;
 //        }
 //
-//        ListNode node = map.get(key);
+//        Node node = map.get(key);
 //        changeNew(node);// 更新结点的时序
 //        return node.value;
 //    }
@@ -144,7 +144,7 @@ class LRUCache {
 //    public void put(int key, int value) {
 //        // 如果已经存在key，则修改value，但是需要更新时序，移动到链表尾部
 //        if(map.containsKey(key)) {
-//            ListNode node = map.get(key);
+//            Node node = map.get(key);
 //            node.value = value;
 //            changeNew(node);
 //            return;
@@ -166,7 +166,7 @@ class LRUCache {
 //
 //    // 在map和链表的尾部添加新结点
 //    private void add(int key, int value) {
-//        ListNode node = new ListNode(key, value);
+//        Node node = new Node(key, value);
 //        if(head == null) {
 //            head = node;
 //        }else {
@@ -178,7 +178,7 @@ class LRUCache {
 //    }
 //
 //    // 将结点从链表中删除
-//    private void remove(ListNode node) {
+//    private void remove(Node node) {
 //        if(node == head && node == tail) {
 //            head = tail = null;
 //        }else if(node == head) {
@@ -197,7 +197,7 @@ class LRUCache {
 //    }
 //
 //    // 将node结点移动到链表尾部
-//    private void changeNew(ListNode node) {
+//    private void changeNew(Node node) {
 //        // 如果本来就在尾部，则不需要变更
 //        if(node == tail) {
 //            return;
